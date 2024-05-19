@@ -2,14 +2,13 @@
 # Conjunto de datos inicial
 El conjunto de datos utilizado para este proyecto se obtuvo de [Kaggle](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer)
 
-Este conjunto de datos contiene 35,685 imágenes en escala de grises de rostros humanos con diferentes expresiones faciales. Las imágenes tienen un tamaño de 48x48 píxeles. 
+Este conjunto de datos contiene 35,887 imágenes en escala de grises de rostros humanos con diferentes expresiones faciales. Las imágenes tienen un tamaño de 48x48 píxeles. 
 
 
-# División de conjunto de datos
-Los datos se dividen en dos subconjuntos: train y test, con una proporción de 80% para entrenamiento y 20% para evaluación. Cada subconjunto se compone de siete carpetas, cada una de las cuales representa una clase de expresión facial:
+Este conjunto de datos ya se encuentra dividido en dos subconjuntos: train y test, con una proporción de 80% para entrenamiento y 20% para evaluación. Cada subconjunto se compone de siete carpetas, cada una de las cuales representa una clase de expresión facial:
 
 
-| Nombre carpeta | Test (cantidad de imágenes) | Train (cantidad de imágenes) |
+| Clase          | Test (cantidad de imágenes) | Train (cantidad de imágenes) |
 | -------------- | --------------------------- | ---------------------------- |
 | angry          | 958                         | 3995                         |
 | disgusted      | 111                         | 436                          |
@@ -20,5 +19,26 @@ Los datos se dividen en dos subconjuntos: train y test, con una proporción de 8
 | surprised      | 831                         | 3171                         |
 
 
+# División de conjunto de datos
+Se decidió modificar la estructura de datos. Esto para generar un mejor balance de datos y también incluir un subconjunto de datos destinado a validación.
 
-Es importante mencionar que la división del conjunto de datos es crucial para que se pueda entrenar el modelo (datos en train) y posteriormente evaluar su rendimiento con datos reales (datos en test). Hacer esta división también evita el sobreentrenamiento (overfitting), el cual ocurre cuando un modelo se ajusta demasiado a los datos de entrenamiento y no puede generalizarse bien a nuevos datos.
+En primer lugar, se redujo el número de clases de 7 a 5 eliminando las clases de "disgusted" y "surprised" debido a su poca cantidad de datos en comparación con las otras clases.
+
+Posteriormente, el conjunto de datos fue dividido en tres subconjuntos:
+- **Train**: Es el subconjunto de datos que se utilizará para entrenar al modelo
+- **Test**: Los datos en este subconjunto se utilizarán para evaluar el rendimiento del modelo con imágenes nuevas que no han sido utilizadas para el entrenamiento del modelo.
+- **Validation**: Los datos en este subconjunto serán utilizados para evaluar el rendimiento del modelo durante el entrenamiento y poder ajustar los hiperparámetros del modelo antes de evaluar el modelo con el conjunto de prueba.
+
+Se realizó una división del 70%, 15% y 15% de la totalidad de los datos, siendo el primer conjunto para entrenamiento, el segundo para validación y el tercero para pruebas. Para esto, se renombraron las imagenes de train y test de cada clase utiizando el programa "rename.py", debido a que contaban con el mismo nombre y no era posible combinar las carpetas. Después de renombrar las imágenes se combinaron las carpetas train y test y se utilizó el programa "split_data.py" obtenido de [Kaggle](https://www.kaggle.com/code/shuvostp/split-folders-for-train-test-val-split-of-images) para hacer la división deseada.
+
+Por lo tanto, la estructura final del conjunto de datos cuenta con un total de 31,339 imágenes, donde estas se distribuyen de la siguiente manera:
+
+| Clase          | Test (cantidad de imágenes) | Train (cantidad de imágenes) | Validation (cantidad de imágenes) |
+| -------------- | --------------------------- | ---------------------------- | --------------------------------- |
+| angry          | 744                         | 3467                         | 742
+| fearful        | 769                         | 3584                         | 768
+| happy          | 1349                        | 6292                         | 1349
+| neutral        | 931                         | 4338                         | 929
+| sad            | 913                         | 4253                         | 911
+
+Es importante mencionar que la correcta división de los datos evita tener problemas como sobreentrenamiento o subentrenamiento. El sobreentrenamiento u **overfitting** ocurre cuando el modelo se ajusta perfectamente o casi perfectamente a los datos de entrenamiento pero tiene un mal rendimiento con datos nuevos. Esto puede ocurrir si se utiliza la totalidad de un conjunto de datos para entrenar un modelo. Por otro lado, el subentrenamiento o **underfitting** sucede cuando la arquitectura del modelo no es lo suficientemente compleja o cuando los datos de entrenamiento no son suficientes.
