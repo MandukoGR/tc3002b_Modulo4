@@ -59,11 +59,11 @@ Otros parámetros de ImageDataGenerator como shear o width shifting no fueron ut
 Finalmente los parámetros utilizados fueron:
 ```python
 train_datagen = ImageDataGenerator(
-							rescale = 1./255, # Reescalamiento
-							rotation_range = 180, # Rotación de 180 grados
-                            brightness_range= (0.1, 0.9), # Nivel de brillo
-							zoom_range = 0.2, # Zoom
-							horizontal_flip = True,) # Reflejo horizontal
+					rescale = 1./255, # Reescalamiento
+					rotation_range = 180, # Rotación de 180 grados
+                            		brightness_range= (0.1, 0.9), # Nivel de brillo
+					zoom_range = 0.2, # Zoom
+					horizontal_flip = True,) # Reflejo horizontal
 ```
 Se realizó el código "preprocess.py" para probar el ImageDataGenerator configurado. Se utilizó un batch de 10 para que se generen 10 imágenes que son almacenadas en la carpeta augmented que se encuentra dentro de data.
 
