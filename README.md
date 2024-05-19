@@ -20,7 +20,7 @@ Este conjunto de datos ya se encuentra dividido en dos subconjuntos: train y tes
 
 
 # División de conjunto de datos
-Se decidió modificar la estructura de datos. Esto para generar un mejor balance de datos y también incluir un subconjunto de datos destinado a validación.
+Se decidió modificar la estructura del conjunto de datos. Esto para generar un mejor balance de datos y también incluir un subconjunto de datos destinado a validación.
 
 En primer lugar, se redujo el número de clases de 7 a 5 eliminando las clases de "disgusted" y "surprised" debido a su poca cantidad de datos en comparación con las otras clases.
 
@@ -42,3 +42,35 @@ Por lo tanto, la estructura final del conjunto de datos cuenta con un total de 3
 | sad            | 913                         | 4253                         | 911
 
 Es importante mencionar que la correcta división de los datos evita tener problemas como sobreentrenamiento o subentrenamiento. El sobreentrenamiento u **overfitting** ocurre cuando el modelo se ajusta perfectamente o casi perfectamente a los datos de entrenamiento pero tiene un mal rendimiento con datos nuevos. Esto puede ocurrir si se utiliza la totalidad de un conjunto de datos para entrenar un modelo. Por otro lado, el subentrenamiento o **underfitting** sucede cuando la arquitectura del modelo no es lo suficientemente compleja o cuando los datos de entrenamiento no son suficientes.
+
+
+# Preprocesado de datos y técnicas de escalamiento
+
+Para realizar el preprocesado de las imágenes, en este proyecto se utiliza el generador de datos **ImageDataGenerator** de Tensorflow. Este cuenta con parámetros configurables que permiten indicar al generador las modificaciones que se realizarán en las imágenes. En este caso, se modificaran los siguientes parámetros:
+
+- **Rotación**: La imágenes pueden ser rotadas hasta 180 grados, ya que esto no altera las características de una expresión facial.
+- **Brillo**: Se puede ajustar el brillo de las imagenes mientras la imagen siga siendo visible, esto puede realizarse utilizando un rango entre 0.1 y 0.9 en la propiedad brightness_range de ImageDataGenerator.
+- **Reescalamiento**: Escalamiento de los valores de los píxeles de las imágenes dividiendo el valor de cada píxel entre 255.
+- **Zoom**: Se utilizarán valores entre menores a 1 para solamente generar acercamientos. Es importante que el acercamiento no sea demasiado porque se pueden perder partes importantes de la imagen.
+- **Flip horizontal**: El flip horizontal refleja la imagen de forma horizontal. En este conjunto de datos se puede utilizar debido a que no altera las expresiones faciales.
+
+Otros parámetros de ImageDataGenerator como shear o width shifting no fueron utilizados debido a que pueden alterar la expresión del un rostro.
+
+Finalmente los parámetros utilizados fueron:
+```python
+train_datagen = ImageDataGenerator(
+							rescale = 1./255, # Reescalamiento
+							rotation_range = 180, # Rotación de 180 grados
+                            brightness_range= (0.1, 0.9), # Nivel de brillo
+							zoom_range = 0.2, # Zoom
+							horizontal_flip = True,) # Reflejo horizontal
+```
+Se realizó el código "preprocess.py" para probar el ImageDataGenerator configurado. Se utilizó un batch de 10 para que se generen 10 imágenes que son almacenadas en la carpeta augmented que se encuentra dentro de data.
+
+
+# Referencias
+1. P. Verma, V. Aggrawal, and J. Maggu, "FExR.A-DCNN: Facial Emotion Recognition with Attention Mechanism using Deep Convolution Neural Network," in *Proc. 2022 Fourteenth Int. Conf. Contemporary Computing (IC3-2022)*, New York, NY, USA, 2022, pp. 196–203. doi: 10.1145/3549206.3549243.
+2. A. Ananthu, "Emotion Detection FER Dataset," Kaggle, 2023. [Online]. Available: https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer?select=train. [Accessed: 19-May-2024].
+3. S. P. Shuvo, "split_folders for train test val split of images," Kaggle, 2023. [Online]. Available: https://www.kaggle.com/code/shuvostp/split-folders-for-train-test-val-split-of-images. [Accessed: 19-May-2024].
+
+
