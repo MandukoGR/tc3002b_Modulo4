@@ -126,7 +126,7 @@ def build_model(input_shape=(48, 48, 1), num_classes=5):
 
 ```
 
-Para compilar y entrenar el modelo se utilizaron 50 epochs con un tamaño de batch de 64. Los hiperparámetros utilizados, también obtenidos del artículo de investigación y son los siguientes:
+Para compilar y entrenar el modelo se utilizaron 50 epochs con un tamaño de batch de 64. Los hiperparámetros utilizados, también obtenidos del artículo de investigación, son los siguientes:
 
 | Hiperparámetro | Valor                      |
 | -------------- | -------------------------- |
