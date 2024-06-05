@@ -239,6 +239,11 @@ Aunque el test accuracy aumentó y el test loss disminuyó con respecto al model
 
 ![Gráfica](/images/ref_graf.jpeg)
 
+En cuanto al comportamiento de accuracy y loss durante los epochs, fue similar al modelo anterior. Sin embargo, en este caso se puede notar cuando se empieza a generar el overfitting.
+
+![Gráfica](/images/acc_loss_graf2.png)
+
+
 Aún así los resultados obtenidos se acercan más a los del estado del arte. Se acerca all accuracy de 0.69 obtenido por Bodapati y Strilakshmi en el artículo de investigación "A Deep CNN Architecture for Facial Expression Recognition in the Wild." Además, de acuerdo con Amil Khanzada, Charles Bai y Ferhat Turker Celepcikay en el artículo "Facial Expression Recognition with Deep Learning" debido al ruido del dataset solo es posible superar el 0.70 de accuracy utilizando técnicas de registro de puntos faciales antes de realizar la clasificación de imágenes o bien utilizar modelos de transfer learning pre entrenados como ResNet50, VGG16 y SeNet50 que requieren una mayor capacidad de cómputo qu ela disponible.
 
 Cabe mencionar que el modelo tuvo un buen comportamiento con imágenes de internet. Los resultados obtenidos con queries se encuentran en Testing.ipynb y fueron los siguientes.
