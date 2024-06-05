@@ -118,6 +118,7 @@ Para compilar y entrenar el modelo se utilizaron 50 epochs con un tamaño de bat
 | loss            | 0.8462          | 0.9161           | 0.8900        |
 
 Con respecto a los resultados obtenidos en el artículo de referencia, los resultados obtenidos son buenos. Ya que se acercan al 69% de accuracy obtenido en el estado del arte. Sin embargo, los resultados siguen teniendo un porcentaje de accuracy pequeño y difieren en un 3% con los del estado del arte. Aún así se puede notar en la siguiente imagen que el accuracy y el loss tanto en train como validation tuvo un buen comportamiento durante los epochs.
+
 ![Acc_Loss](/images/acc_loss_grafs.png)
 
 Se generó una matriz de confusión para obtener la cantidad de predicciones verdaderas, falsos positivos y falsos negativos de cada clase. La matriz es la siguiente:
